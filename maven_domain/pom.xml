@@ -11,5 +11,11 @@
 
     <artifactId>maven_domain</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.tt</groupId>
+            <artifactId>maven_utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

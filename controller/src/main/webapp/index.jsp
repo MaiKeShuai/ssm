@@ -1,7 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <body>
 <h2>Hello World!</h2>
-<a href="${pageContext.request.contextPath}/product/findAll.do">点击</a>
-<a href="${pageContext.request.contextPath}/product/findAll1.do">点击</a>
+    <jsp:forward page="./page/main.jsp"/>
 </body>
 </html>
