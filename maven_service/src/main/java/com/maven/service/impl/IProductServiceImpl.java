@@ -1,5 +1,6 @@
 package com.maven.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.maven.domain.Product;
 import com.maven.mapper.IProductMapper;
 import com.maven.service.IProductService;
@@ -15,6 +16,11 @@ public class IProductServiceImpl implements IProductService {
     private IProductMapper iProductMapper;
 
     public List<Product> findAll() {
+        return iProductMapper.findAll();
+    }
+
+    public List<Product> findAll(int page, int size) {
+        PageHelper.startPage(page,size);
         return iProductMapper.findAll();
     }
 
