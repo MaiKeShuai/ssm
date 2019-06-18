@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IOrdersMapper {
     List<Orders> findAll();
+
+    Orders findById(String id);
 }

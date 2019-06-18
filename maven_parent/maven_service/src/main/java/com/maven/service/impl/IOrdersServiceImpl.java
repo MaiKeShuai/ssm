@@ -20,4 +20,8 @@ public class IOrdersServiceImpl implements IOrdersService {
         PageHelper.startPage(page,size);
         return ordersMapper.findAll();
     }
+
+    public Orders findById(String id) {
+        return ordersMapper.findById(id);
+    }
 }

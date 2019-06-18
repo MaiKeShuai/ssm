@@ -29,4 +29,19 @@ public class IOrdersController {
         mv.setViewName("orders-list");
         return mv;
     }
+
+    /**
+     * 查询订单详细信息
+     */
+    @RequestMapping("findById.do")
+    public ModelAndView findById(String id){
+        ModelAndView mv = new ModelAndView();
+
+        Orders orders = ordersService.findById(id);
+        mv.addObject("orders",orders);
+        mv.setViewName("orders-show");
+
+
+        return mv;
+    }
 }

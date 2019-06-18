@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+    <!--<security:http auto-config="true" use-expressions="false">
+        &lt;!&ndash;security:intercept-url定义一个过来规则,pattern表示要对那先资源进行过滤,access表示请求那些资源需要什么样的权限
+            默认配置时,他因该以一个逗号进行分割角色列表
+        &ndash;&gt;
+        <security:intercept-url pattern="/**" access="ROLE_USER"/>
+    </security:http>-->
+</beans>

@@ -15,10 +15,51 @@
         <result property="product.productName" column="productname"/>
         <result property="product.productPrice" column="productprice"/>
     </resultMap>
-
     <select id="findAll" resultMap="ordersMap">
         select o.id oid,productnum,productname,cityname,departuretime,productprice,productdesc,productstatus,p.id pid,ordernum,ordertime,peoplecount,orderdesc,paytype,orderstatus,productid,memberid
         from product p, orders o
         where o.productid = p.id
+    </select>
+
+
+    <resultMap id="ordersMapShow" type="orders">
+        <id property="id" column="oid"/>
+        <result property="orderNum" column="ordernum"/>
+        <result property="orderTime" column="ordertime"/>
+        <result property="orderStatus" column="orderstatus"/>
+        <result property="peopleCount" column="peoplecount"/>
+        <result property="payType" column="paytype"/>
+        <result property="orderDesc" column="orderdesc"/>
+        <association property="product" javaType="product">
+            <result property="productNum" column="productnum"/>
+            <result property="productName" column="productname"/>
+            <result property="cityName" column="cityname"/>
+            <result property="departureTime" column="departuretime"/>
+            <result property="productPrice" column="productprice"/>
+            <result property="productDesc" column="productdesc"/>
+            <result property="productStatus" column="productstatus"/>
+        </association>
+        <association property="member" javaType="member">
+        <result property="name" column="name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="phoneNum" column="phonenum"/>
+        <result property="email" column="email"/>
+        </association>
+        <collection property="travellers" ofType="traveller">
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="phoneNum" column="phonenum"/>
+            <result property="credentialsType" column="credentialstype"/>
+            <result property="credentialsNum" column="credentialsnum"/>
+            <result property="travellerType" column="travellertype"/>
+        </collection>
+    </resultMap>
+    <select id="findById" resultMap="ordersMapShow" parameterType="string">
+       select orders.*, product.*, member.*, traveller.*,orders.id oid
+       from orders left join product on orders.productid = product.id
+       left join member on orders.memberid = member.id
+       left join order_traveller on orders.id = order_traveller.orderid
+       left join traveller on traveller.id = order_traveller.travellerid
+       where orders.id=#{id}
     </select>
 </mapper>
