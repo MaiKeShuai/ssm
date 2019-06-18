@@ -20,10 +20,6 @@ public class Product {
      private String productStatusStr;
 
     public String getId() {
-        if(id == null){
-            UUID uuid = UUID.randomUUID();
-            id = uuid.toString();
-        }
         return id;
     }
 

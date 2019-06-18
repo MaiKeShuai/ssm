@@ -17,10 +17,6 @@ public class Traveller {
     private String travellerTypeStr;
 
     public String getId() {
-        if(id == null){
-            UUID uuid = UUID.randomUUID();
-            id = uuid.toString();
-        }
         return id;
     }
 

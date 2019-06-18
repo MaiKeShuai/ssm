@@ -210,15 +210,15 @@
 
                     <div class="box-tools pull-right">
                         <ul class="pagination">
-                            <li><a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=${pageInfo.pageSize}" aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/orders/findAll.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">上一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAllPage.do?page=1&size=${pageInfo.pageSize}" aria-label="Previous">首页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAllPage.do?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">上一页</a></li>
 
                             <c:forEach begin="1" end="${pageInfo.pages}" var="num">
-                                <li><a href="${pageContext.request.contextPath}/orders/findAll.do?page=${num}&size=${pageInfo.pageSize}">${num}</a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/findAllPage.do?page=${num}&size=${pageInfo.pageSize}">${num}</a></li>
                             </c:forEach>
 
-                            <li><a href="${pageContext.request.contextPath}/orders/findAll.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/orders/findAll.do?page=${pageInfo.pages}&size=${pageInfo.size}" aria-label="Next">尾页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAllPage.do?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
+                            <li><a href="${pageContext.request.contextPath}/product/findAllPage.do?page=${pageInfo.pages}&size=${pageInfo.size}" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
                 </div>

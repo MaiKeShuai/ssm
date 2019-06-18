@@ -10,10 +10,6 @@ public class Member {
     private String email;       //邮箱
 
     public String getId() {
-        if(id == null){
-            UUID uuid = UUID.randomUUID();
-            id = uuid.toString();
-        }
         return id;
     }
 
