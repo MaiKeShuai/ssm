@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements IUserService {
     private IUserMapper userMapper;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserInfo userInfo = userMapper.findAll(username);
+        UserInfo userInfo = userMapper.loadUserByUsername(username);
 
 
         List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
@@ -29,7 +30,6 @@ public class UserServiceImpl implements IUserService {
         for (Role role : roleList) {
             list.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
         }
-
 
 
         User user = new User(userInfo.getUsername(),
@@ -40,4 +40,16 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
 
+    @Override
+    public List<UserInfo> findAll() {
+        List<UserInfo> userInfoList = userMapper.findAll();
+        return userInfoList;
+    }
+
+    @Override
+    public void save(UserInfo userInfo) {
+        //密码进行加密
+        userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
+        userMapper.save(userInfo);
+    }
 }

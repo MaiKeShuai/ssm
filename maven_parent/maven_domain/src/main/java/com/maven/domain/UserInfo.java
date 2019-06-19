@@ -14,6 +14,15 @@ public class UserInfo {
 
     private List<Role> roles;
 
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
     public String getId() {
         return id;
     }
@@ -44,14 +53,6 @@ public class UserInfo {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
     }
 
     public Integer getStatus() {

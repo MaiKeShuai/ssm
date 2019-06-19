@@ -32,7 +32,7 @@
                 username-parameter="username"
                 password-parameter="password"
                 login-processing-url="/login.do"
-
+                default-target-url="/index.jsp"
                 authentication-failure-url="/failure.jsp"
                 authentication-success-forward-url="/page/main.jsp"
         />

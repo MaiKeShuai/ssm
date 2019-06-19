@@ -17,11 +17,21 @@
             <result property="roleDesc" column="roledesc"/>
         </collection>
     </resultMap>
-    <select id="findAll" parameterType="string" resultMap="userInfoMap">
+
+    <select id="loadUserByUsername" parameterType="string" resultMap="userInfoMap">
         select u.*, r.*, r.id rid
         from users u, users_role ur, role r
         where u.id = ur.userid
            and r.id = ur.roleid
            and username = #{username}
     </select>
+
+    <select id="findAll" resultType="userInfo">
+      select * from users
+    </select>
+
+    <insert id="save" parameterType="userInfo">
+        insert into users (username,password,email,phonenum,status)
+        values (#{username},#{password},#{email},#{phoneNum},#{status})
+    </insert>
 </mapper>
