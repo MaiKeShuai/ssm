@@ -33,16 +33,14 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">登录系统</p>
 
-			<form action="${pageContext.request.contextPath}/login" method="post">
+			<form action="${pageContext.request.contextPath}/login.do" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" name="username" class="form-control"
-						placeholder="用户名"> <span
-						class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<input type="text" name="username" class="form-control" placeholder="用户名">
+					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" name="password" class="form-control"
-						placeholder="密码"> <span
-						class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<input type="password" name="password" class="form-control" placeholder="密码">
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8">

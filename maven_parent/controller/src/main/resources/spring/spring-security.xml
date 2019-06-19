@@ -3,13 +3,84 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/security
-       http://www.springframework.org/schema/security/spring-security.xsd">
-    <!--<security:http auto-config="true" use-expressions="false">
-        &lt;!&ndash;security:intercept-url定义一个过来规则,pattern表示要对那先资源进行过滤,access表示请求那些资源需要什么样的权限
-            默认配置时,他因该以一个逗号进行分割角色列表
-        &ndash;&gt;
-        <security:intercept-url pattern="/**" access="ROLE_USER"/>
-    </security:http>-->
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 配置不拦截的资源 -->
+    <security:http pattern="/login.jsp" security="none"/>
+    <security:http pattern="/failure.jsp" security="none"/>
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/img/**" security="none"/>
+    <security:http pattern="/plugins/**" security="none"/>
+
+    <security:http auto-config="true" use-expressions="false">
+        <!-- 配置具体的拦截的规则 pattern="请求路径的规则/**拦截所有的请求" access="访问系统的人，必须有ROLE_USER或者ROLE_ADMIN的角色才能访问资源" -->
+        <security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN"/>
+
+        <!-- 定义跳转的具体的页面
+            login-page:配置自定义的登录页面
+            username-parameter:登录表单提交的用户名:name属性名称
+            password-parameter:登录表单提交的密码:name属性名称
+            login-processing-url:配置表单所请求的url,只要请求了此url,就会被框架所拦截到,获取username和password
+            default-target-url:默认跳转的路径
+            authentication-failure-url:登录失败跳转的页面
+            authentication-success-forward-url:登录成功所跳转的路径
+        -->
+        <security:form-login
+                login-page="/login.jsp"
+                username-parameter="username"
+                password-parameter="password"
+                login-processing-url="/login.do"
+
+                authentication-failure-url="/failure.jsp"
+                authentication-success-forward-url="/page/main.jsp"
+        />
+
+        <!-- 关闭跨域请求 -->
+        <security:csrf disabled="true"/>
+
+        <!-- 退出登录
+            invalidate-session:退出登录成功后是否删除session中的user对象
+            logout-url:退出登录所请求的url
+            logout-success-url:退出成功后跳转的url
+         -->
+        <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/login.jsp"/>
+
+    </security:http>
+
+    <!-- 切换成数据库中的用户名和密码 -->
+    <security:authentication-manager>
+        <!--user-service-ref:userService,配置可以返回user对象的service-->
+        <security:authentication-provider user-service-ref="userServiceImpl">
+            <!-- 配置加密的方式 -->
+            <!--<security:password-encoder ref="passwordEncoder"/>-->
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 配置加密类 -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <!-- 提供了入门的方式，在内存中存入用户名和密码
+    <security:authentication-manager>
+    	<security:authentication-provider>
+    		<security:user-service>
+    			<security:user name="admin" password="{noop}admin" authorities="ROLE_USER"/>
+    		</security:user-service>
+    	</security:authentication-provider>
+    </security:authentication-manager>
+    -->
+
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
