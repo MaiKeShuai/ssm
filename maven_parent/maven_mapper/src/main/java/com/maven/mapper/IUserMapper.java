@@ -10,4 +10,6 @@ public interface IUserMapper {
     List<UserInfo> findAll();
 
     void save(UserInfo userInfo);
+
+    UserInfo findById(String id);
 }

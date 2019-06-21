@@ -4,6 +4,7 @@ import com.maven.domain.Role;
 import com.maven.domain.UserInfo;
 import com.maven.mapper.IUserMapper;
 import com.maven.service.IUserService;
+import com.maven.util.BCryptPasswordEncoderUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -32,9 +33,7 @@ public class UserServiceImpl implements IUserService {
         }
 
 
-        User user = new User(userInfo.getUsername(),
-                "{noop}"+userInfo.getPassword(),
-                userInfo.getStatus() == 0 ? false :true,
+        User user = new User(userInfo.getUsername(), userInfo.getPassword(), userInfo.getStatus() == 0 ? false :true,
                 true, true, true, list);
 
         return user;
@@ -49,7 +48,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void save(UserInfo userInfo) {
         //密码进行加密
-        userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
+        userInfo.setPassword(BCryptPasswordEncoderUtils.encode(userInfo.getPassword()));
         userMapper.save(userInfo);
+    }
+
+    @Override
+    public UserInfo findById(String id) {
+        UserInfo userInfo = userMapper.findById(id);
+        return userInfo;
     }
 }

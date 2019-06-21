@@ -54,7 +54,7 @@
         <!--user-service-ref:userService,配置可以返回user对象的service-->
         <security:authentication-provider user-service-ref="userServiceImpl">
             <!-- 配置加密的方式 -->
-            <!--<security:password-encoder ref="passwordEncoder"/>-->
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 

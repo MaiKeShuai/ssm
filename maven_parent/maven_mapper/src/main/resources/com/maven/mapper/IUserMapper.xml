@@ -34,4 +34,32 @@
         insert into users (username,password,email,phonenum,status)
         values (#{username},#{password},#{email},#{phoneNum},#{status})
     </insert>
+
+    <resultMap id="userByIdInfoMap" type="userInfo">
+        <id property="id" column="uuid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phoneNum" column="phonenum"/>
+        <result property="status" column="status"/>
+        <collection property="roles" ofType="role">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="rolename"/>
+            <result property="roleDesc" column="roledesc"/>
+            <collection property="permissions" ofType="permission">
+                <id property="id" column="pid"/>
+                <result property="permissionName" column="permissionname"/>
+                <result property="url" column="url"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="findById" parameterType="string" resultMap="userByIdInfoMap">
+        select u.*, r.*, p.*,r.id rid,u.id uuid,p.id pid
+        from users u, users_role ur, role r, role_permission rp, permission p
+        where u.id = ur.userid
+           and r.id = ur.roleid
+           and r.id = rp.roleid
+           and p.id = rp.permissionid
+           and u.id = #{id}
+    </select>
 </mapper>
